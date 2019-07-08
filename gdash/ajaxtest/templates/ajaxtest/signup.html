@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+
+{% block styles %}{% endblock styles %}
+
+
+{% block content %}
+  <p>
+    <b>Instructions</b>
+    <ul>
+      <li>Create a superuser account with the python shell.</li>
+      <li>Create a user account for yourself in the localhost:8000/admin.</li>
+      <li>With the project running, type one of the usernames you created into the "Username" field and tab.</li>
+      <li>A modal popup will tell you if the name already exists. If not it will let you continue with the form.</li>
+      <li>This is basic AJAX at work.</li>
+    </ul>
+    <i>Generally speaking: try to avoid modifying JavaScript code with Python code.<br />Keep the URL references in the HTML and manage user messages in the Python code.</i>
+  </p>
+  <br />
+
+  <!-- v1. -->
+  <!-- <form method="post"> -->
+  <!-- v2. -->
+  <form method="post" data-validate-username-url="{% url 'validate_username' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign up</button>
+  </form>
+
+  <!--
+  If you have direct access to the HTML field, prefer adding a class name like this:
+  <input type="text" name="username" id="id_username" class="js-validate-username">
+  And then you hook the change event to the class js-validate-username instead.
+  The js- prefix suggests that there is a JavaScript code that interacts with this element.
+  And then use this prefix for JavaScript only.
+  Never use it for styling the component as well via css.
+  -->
+{% endblock %}
+
+
+{% block javascript %}
+  <script>
+    console.log('signup.html');
+  </script>
+
+  <script>
+    $("#id_username").change(function () {
+      // Log username field value.
+      // console.log( $(this).val() );
+
+      // var username = $(this).val();                    // v1.
+      var form = $(this).closest("form");                 // v2, v3.
+
+      $.ajax({
+        // url: '/ajaxtest/ajax/validate_username/',      // v1.
+        // url: '{% url "validate_username" %}',          // v2.
+        url: form.attr("data-validate-username-url"),     // v3.
+        // data: {                                        // v1, v2.
+        //   'username': username
+        // },
+        data: form.serialize(),                           // v3.
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            // alert("A user with this username already exists.");  // v1, v2.
+            alert(data.error_message);                     // v3.
+          }
+        }
+      });
+    });
+  </script>
+{% endblock javascript %}

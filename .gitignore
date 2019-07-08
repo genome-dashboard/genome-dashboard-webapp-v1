@@ -87,3 +87,4 @@ secrets.py
 ### Dev Cruft
 .env
 db.sqlite3
+dev_notes.txt

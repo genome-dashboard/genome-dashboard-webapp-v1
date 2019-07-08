@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}GDash Django 1.11{% endblock %}</title>
+    <link rel="stylesheet" href="style.css" />
+    {% block styles %}{% endblock styles %}
+</head>
+
+<body>
+    <div id="sidebar">
+        {% block sidebar %}
+        <ul>
+            <li><a href="/">Home</a></li>
+            <!-- <li><a href="/simpleview/">Simpleview</a></li> -->
+            <li><a href="/polls/">Polls App</a></li>
+            <li><a href="/ajaxtest/">AJAX Test</a></li>
+            <li><a href="/embedded/dalliance/">Dalliance</a></li>
+            <li><a href="/embedded/give/">Give</a></li>
+        </ul>
+        {% endblock sidebar %}
+        <hr/>
+    </div>
+
+    <div id="content">
+        {% block content %}{% endblock content %}
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
+    <script>
+        console.log('base.html');
+        console.log($);
+    </script>
+    {% block javascript %}{% endblock javascript %}
+</body>
+</html>

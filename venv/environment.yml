@@ -1,0 +1,26 @@
+name: gdash-py2
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - ca-certificates=2019.3.9
+  - certifi=2019.3.9
+  - libcxx=7.0.0
+  - libffi=3.2.1
+  - llvm-meta=7.0.0
+  - ncurses=6.1
+  - nodejs=11.11.0
+  - openssl=1.1.1b
+  - pip=19.0.3
+  - python=2.7.15
+  - readline=7.0
+  - setuptools=41.0.0
+  - sqlite=3.26.0
+  - tk=8.6.9
+  - wheel=0.33.1
+  - zlib=1.2.11
+  - pip:
+    - django==1.11.20
+    - pytz==2018.9
+prefix: /Users/jgentle/miniconda3/envs/gdash-py2
+
