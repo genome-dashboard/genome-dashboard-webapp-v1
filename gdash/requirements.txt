@@ -9,7 +9,7 @@ pip==19.0.3
 psycopg2==2.8.2
 pytz==2018.9
 requests==2.22.0
-setuptools==41.0.0
+setuptools==65.5.1
 simplejson==3.16.0
 urllib3==1.25.3
 wheel==0.33.1
